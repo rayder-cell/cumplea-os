@@ -23,10 +23,10 @@
 
         .titulo {
             position: absolute;
-            top: 20px;
+            top: 15px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 4em;
+            font-size: clamp(2em, 8vw, 4em);
             font-weight: bold;
             color: #ff00ff;
             text-shadow: 0 0 20px rgba(255, 0, 255, 0.8),
@@ -34,30 +34,36 @@
             animation: pulso 2s ease-in-out infinite;
             z-index: 10;
             text-align: center;
+            padding: 0 10px;
+            width: 100%;
         }
 
         .fecha {
             position: absolute;
-            top: 100px;
+            top: clamp(60px, 15vh, 100px);
             left: 50%;
             transform: translateX(-50%);
-            font-size: 2em;
+            font-size: clamp(1.2em, 5vw, 2em);
             font-weight: bold;
             color: #ffd700;
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
             z-index: 10;
             text-align: center;
+            padding: 0 10px;
+            width: 100%;
         }
 
         .mensaje {
             position: absolute;
-            top: 160px;
+            top: clamp(100px, 22vh, 160px);
             left: 50%;
             transform: translateX(-50%);
-            font-size: 1.5em;
+            font-size: clamp(1em, 4vw, 1.5em);
             color: #ffffff;
             z-index: 10;
             text-align: center;
+            padding: 0 10px;
+            width: 100%;
         }
 
         .frase {
@@ -65,27 +71,24 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 1.8em;
+            font-size: clamp(1em, 4vw, 1.8em);
             font-style: italic;
             color: #29e1ee;
-            max-width: 500px;
+            max-width: min(90%, 500px);
             line-height: 1.6;
             background: rgba(0, 0, 0, 0.5);
-            padding: 30px 40px;
+            padding: clamp(15px, 5vw, 30px) clamp(20px, 6vw, 40px);
             border-radius: 20px;
             backdrop-filter: blur(10px);
             z-index: 10;
             text-align: center;
-            background-image: url('image/Captura.PNG');
-            background-size: cover;
-            background-position: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             font-weight: bold;
         }
 
         .control-musica {
             position: absolute;
-            bottom: 30px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 20;
@@ -94,9 +97,9 @@
         .boton-musica {
             background: rgba(255, 255, 255, 0.9);
             border: none;
-            padding: 15px 30px;
+            padding: clamp(10px, 3vw, 15px) clamp(20px, 5vw, 30px);
             border-radius: 50px;
-            font-size: 1.2em;
+            font-size: clamp(0.9em, 3.5vw, 1.2em);
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
@@ -107,6 +110,10 @@
         .boton-musica:hover {
             transform: scale(1.1);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .boton-musica:active {
+            transform: scale(0.95);
         }
 
         @keyframes pulso {
@@ -138,8 +145,8 @@
 
         .foto-bts {
             position: absolute;
-            width: 120px;
-            height: 120px;
+            width: clamp(70px, 15vw, 120px);
+            height: clamp(70px, 15vw, 120px);
             border-radius: 15px;
             border: 4px solid white;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
@@ -157,12 +164,62 @@
             to { opacity: 1; }
         }
 
-        .foto-bts:nth-child(1) { top: 10%; left: 5%; animation-delay: 0.5s; }
-        .foto-bts:nth-child(2) { top: 15%; right: 5%; animation-delay: 1s; }
-        .foto-bts:nth-child(3) { bottom: 20%; left: 8%; animation-delay: 1.5s; }
-        .foto-bts:nth-child(4) { bottom: 15%; right: 8%; animation-delay: 2s; }
-        .foto-bts:nth-child(5) { top: 45%; left: 2%; animation-delay: 2.5s; }
-        .foto-bts:nth-child(6) { top: 45%; right: 2%; animation-delay: 3s; }
+        /* Ajustes para móviles */
+        @media (max-width: 768px) {
+            .foto-bts:nth-child(1) { top: 8%; left: 2%; animation-delay: 0.5s; }
+            .foto-bts:nth-child(2) { top: 12%; right: 2%; animation-delay: 1s; }
+            .foto-bts:nth-child(3) { bottom: 25%; left: 3%; animation-delay: 1.5s; }
+            .foto-bts:nth-child(4) { bottom: 20%; right: 3%; animation-delay: 2s; }
+            .foto-bts:nth-child(5) { top: 40%; left: 1%; animation-delay: 2.5s; }
+            .foto-bts:nth-child(6) { top: 40%; right: 1%; animation-delay: 3s; }
+
+            .titulo {
+                top: 10px;
+            }
+
+            .frase {
+                max-width: 85%;
+            }
+        }
+
+        /* Desktop */
+        @media (min-width: 769px) {
+            .foto-bts:nth-child(1) { top: 10%; left: 5%; animation-delay: 0.5s; }
+            .foto-bts:nth-child(2) { top: 15%; right: 5%; animation-delay: 1s; }
+            .foto-bts:nth-child(3) { bottom: 20%; left: 8%; animation-delay: 1.5s; }
+            .foto-bts:nth-child(4) { bottom: 15%; right: 8%; animation-delay: 2s; }
+            .foto-bts:nth-child(5) { top: 45%; left: 2%; animation-delay: 2.5s; }
+            .foto-bts:nth-child(6) { top: 45%; right: 2%; animation-delay: 3s; }
+        }
+
+        /* Móviles pequeños */
+        @media (max-width: 480px) {
+            .titulo {
+                font-size: 2em;
+                top: 5px;
+            }
+            
+            .fecha {
+                top: 50px;
+                font-size: 1em;
+            }
+            
+            .mensaje {
+                top: 80px;
+                font-size: 0.9em;
+            }
+
+            .frase {
+                font-size: 0.95em;
+                padding: 15px 20px;
+            }
+
+            .foto-bts {
+                width: 60px;
+                height: 60px;
+                border: 2px solid white;
+            }
+        }
     </style>
 </head>
 <body>
@@ -191,8 +248,8 @@
     <script>
         // Control de música
         let musicaReproduciendo = false;
-        const audio = new Audio('musica/musica.mp4'); // Ruta de tu archivo de música
-        audio.loop = true; // Repetir la música
+        const audio = new Audio('musica/musica.mp4');
+        audio.loop = true;
 
         const btnMusica = document.getElementById('btnMusica');
         
@@ -216,13 +273,17 @@
         const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas3d'), alpha: true });
         
         renderer.setSize(window.innerWidth, window.innerHeight);
-        camera.position.z = 15;
+        
+        // Ajustar posición de cámara según dispositivo
+        const isMobile = window.innerWidth <= 768;
+        camera.position.z = isMobile ? 20 : 15;
 
         // Crear pastel 3D
         const crearPastel = () => {
             const grupo = new THREE.Group();
             
-            // Base del pastel (blanca)
+            const escala = isMobile ? 0.7 : 1;
+            
             const geometriaBase = new THREE.CylinderGeometry(2, 2.2, 1.5, 32);
             const materialBase = new THREE.MeshPhongMaterial({ 
                 color: 0xffffff,
@@ -230,9 +291,9 @@
             });
             const base = new THREE.Mesh(geometriaBase, materialBase);
             base.position.y = -2;
+            base.scale.set(escala, escala, escala);
             grupo.add(base);
 
-            // Capa media (amarilla/dorada)
             const geometriaMedio = new THREE.CylinderGeometry(1.7, 1.9, 1.2, 32);
             const materialMedio = new THREE.MeshPhongMaterial({ 
                 color: 0xffd700,
@@ -240,9 +301,9 @@
             });
             const medio = new THREE.Mesh(geometriaMedio, materialMedio);
             medio.position.y = -0.85;
+            medio.scale.set(escala, escala, escala);
             grupo.add(medio);
 
-            // Capa superior (rosa)
             const geometriaTop = new THREE.CylinderGeometry(1.4, 1.6, 1, 32);
             const materialTop = new THREE.MeshPhongMaterial({ 
                 color: 0xffb6c1,
@@ -250,25 +311,24 @@
             });
             const top = new THREE.Mesh(geometriaTop, materialTop);
             top.position.y = 0.1;
+            top.scale.set(escala, escala, escala);
             grupo.add(top);
 
-            // Velas
             for (let i = 0; i < 4; i++) {
                 const angulo = (i / 4) * Math.PI * 2;
-                const radio = 0.8;
+                const radio = 0.8 * escala;
                 
-                // Vela
                 const geometriaVela = new THREE.CylinderGeometry(0.08, 0.08, 0.8, 16);
                 const materialVela = new THREE.MeshPhongMaterial({ color: 0xffffff });
                 const vela = new THREE.Mesh(geometriaVela, materialVela);
                 vela.position.set(
                     Math.cos(angulo) * radio,
-                    1,
+                    1 * escala,
                     Math.sin(angulo) * radio
                 );
+                vela.scale.set(escala, escala, escala);
                 grupo.add(vela);
 
-                // Llama
                 const geometriaLlama = new THREE.SphereGeometry(0.15, 16, 16);
                 const materialLlama = new THREE.MeshBasicMaterial({ 
                     color: 0xffa500,
@@ -278,9 +338,10 @@
                 const llama = new THREE.Mesh(geometriaLlama, materialLlama);
                 llama.position.set(
                     Math.cos(angulo) * radio,
-                    1.5,
+                    1.5 * escala,
                     Math.sin(angulo) * radio
                 );
+                llama.scale.set(escala, escala, escala);
                 grupo.add(llama);
             }
 
@@ -293,59 +354,60 @@
         const pastel2 = crearPastel();
         scene.add(pastel2);
 
-        pastel.position.x = -8;
+        const posX = isMobile ? 10 : 8;
+        pastel.position.x = -posX;
         pastel.position.y = -2;
-        pastel2.position.x = 8;
+        pastel2.position.x = posX;
         pastel2.position.y = -2;
 
         // Crear globos
         const crearGlobo = (x, y, z, color) => {
             const grupo = new THREE.Group();
             
-            // Globo con forma ovalada (más realista)
+            const escala = isMobile ? 0.7 : 1;
+            
             const geometria = new THREE.SphereGeometry(0.5, 32, 32);
             const material = new THREE.MeshPhongMaterial({ 
                 color: color,
                 shininess: 100
             });
             const globo = new THREE.Mesh(geometria, material);
-            // Escalar para hacer forma de globo real (más alto que ancho)
-            globo.scale.set(0.8, 1.2, 0.8);
+            globo.scale.set(0.8 * escala, 1.2 * escala, 0.8 * escala);
             grupo.add(globo);
 
-            // Nudo del globo (parte inferior)
             const geometriaNudo = new THREE.SphereGeometry(0.12, 16, 16);
             const materialNudo = new THREE.MeshPhongMaterial({ 
                 color: color,
                 shininess: 80
             });
             const nudo = new THREE.Mesh(geometriaNudo, materialNudo);
-            nudo.position.y = -0.65;
-            nudo.scale.set(0.7, 1.2, 0.7);
+            nudo.position.y = -0.65 * escala;
+            nudo.scale.set(0.7 * escala, 1.2 * escala, 0.7 * escala);
             grupo.add(nudo);
 
-            // Cuerda
             const geometriaCuerda = new THREE.CylinderGeometry(0.02, 0.02, 3, 8);
             const materialCuerda = new THREE.MeshBasicMaterial({ color: 0x333333 });
             const cuerda = new THREE.Mesh(geometriaCuerda, materialCuerda);
-            cuerda.position.y = -2.2;
+            cuerda.position.y = -2.2 * escala;
+            cuerda.scale.set(escala, escala, escala);
             grupo.add(cuerda);
 
             grupo.position.set(x, y, z);
             return grupo;
         };
 
+        const factorPos = isMobile ? 1.3 : 1;
         const globos = [
-            crearGlobo(-10, 3, 2, 0xff0000),
-            crearGlobo(-12, 1, 2, 0x00ff00),
-            crearGlobo(10, 2.5, 2, 0xff00ff),
-            crearGlobo(12, 0.5, 2, 0x0000ff),
-            crearGlobo(-11, -1, 2, 0xffff00),
-            crearGlobo(-13, 2, 2, 0xff6600),
-            crearGlobo(13, 1.5, 2, 0x00ffff),
-            crearGlobo(-10, 4, 2, 0xff1493),
-            crearGlobo(11, -0.5, 2, 0x9400d3),
-            crearGlobo(-12, -2, 2, 0x32cd32)
+            crearGlobo(-10 * factorPos, 3, 2, 0xff0000),
+            crearGlobo(-12 * factorPos, 1, 2, 0x00ff00),
+            crearGlobo(10 * factorPos, 2.5, 2, 0xff00ff),
+            crearGlobo(12 * factorPos, 0.5, 2, 0x0000ff),
+            crearGlobo(-11 * factorPos, -1, 2, 0xffff00),
+            crearGlobo(-13 * factorPos, 2, 2, 0xff6600),
+            crearGlobo(13 * factorPos, 1.5, 2, 0x00ffff),
+            crearGlobo(-10 * factorPos, 4, 2, 0xff1493),
+            crearGlobo(11 * factorPos, -0.5, 2, 0x9400d3),
+            crearGlobo(-12 * factorPos, -2, 2, 0x32cd32)
         ];
 
         globos.forEach(globo => scene.add(globo));
@@ -364,7 +426,8 @@
 
         // Crear confeti
         const crearConfeti = () => {
-            for (let i = 0; i < 40; i++) {
+            const cantidad = isMobile ? 25 : 40;
+            for (let i = 0; i < cantidad; i++) {
                 setTimeout(() => {
                     const confeti = document.createElement('div');
                     confeti.className = 'confeti';
@@ -408,6 +471,9 @@
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
+            
+            const nuevoIsMobile = window.innerWidth <= 768;
+            camera.position.z = nuevoIsMobile ? 20 : 15;
         });
     </script>
 </body>
