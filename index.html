@@ -244,7 +244,7 @@
     </div>
 
     <div class="titulo">¡FELIZ CUMPLEAÑOS MEYLIN!</div>
-    <div class="fecha">🎂 🎂 🎂</div>
+    <div class="fecha">🎂 03 de Enero 2026 🎂</div>
     <div class="mensaje">🎉 Que tengas un día maravilloso 🎉</div>
     
     <canvas id="canvas3d"></canvas>
@@ -294,7 +294,8 @@
         const isMobile = window.innerWidth <= 768;
         const isSmallMobile = window.innerWidth <= 480;
         
-        camera.position.z = isSmallMobile ? 22 : (isMobile ? 20 : 15);
+        camera.position.z = isSmallMobile ? 18 : (isMobile ? 16 : 15);
+        camera.position.y = -1;
 
         // Crear pastel 3D
         const crearPastel = () => {
@@ -308,7 +309,7 @@
                 shininess: 100
             });
             const base = new THREE.Mesh(geometriaBase, materialBase);
-            base.position.y = -1;
+            base.position.y = -2;
             base.scale.set(escala, escala, escala);
             grupo.add(base);
 
@@ -369,13 +370,8 @@
         const pastel = crearPastel();
         scene.add(pastel);
 
-        const pastel2 = crearPastel();
-        scene.add(pastel2);
-
-        const posX = isSmallMobile ? 11 : (isMobile ? 10 : 8);
-        const posY = isSmallMobile ? -3 : -2;
-        pastel.position.set(-posX, posY, 0);
-        pastel2.position.set(posX, posY, 0);
+        // Posición centrada debajo de la frase
+        pastel.position.set(0, -6, 0);
 
         // Crear globos
         const crearGlobo = (x, y, z, color) => {
@@ -472,7 +468,6 @@
             tiempo += 0.01;
 
             pastel.rotation.y += 0.005;
-            pastel2.rotation.y -= 0.005;
 
             globos.forEach((globo, i) => {
                 globo.position.y += Math.sin(tiempo + i) * 0.01;
@@ -494,7 +489,8 @@
                 
                 const nuevoIsMobile = window.innerWidth <= 768;
                 const nuevoIsSmallMobile = window.innerWidth <= 480;
-                camera.position.z = nuevoIsSmallMobile ? 22 : (nuevoIsMobile ? 20 : 15);
+                camera.position.z = nuevoIsSmallMobile ? 18 : (nuevoIsMobile ? 16 : 15);
+                camera.position.y = -1;
             }, 250);
         });
     </script>
