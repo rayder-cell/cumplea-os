@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: linear-gradient(135deg, #6b7fdb 0%, #7b5fb8 100%);
+            font-family: 'Arial', sans-serif;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        .titulo {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 4em;
+            font-weight: bold;
+            color: #ff00ff;
+            text-shadow: 0 0 20px rgba(255, 0, 255, 0.8),
+                         0 0 40px rgba(255, 0, 255, 0.5);
+            animation: pulso 2s ease-in-out infinite;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .fecha {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2em;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+            z-index: 10;
+            text-align: center;
+        }
+
+        .mensaje {
+            position: absolute;
+            top: 160px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5em;
+            color: #ffffff;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .frase {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.8em;
+            font-style: italic;
+            color: #29e1ee;
+            max-width: 500px;
+            line-height: 1.6;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 30px 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+            text-align: center;
+            background-image: url('image/Captura.PNG');
+            background-size: cover;
+            background-position: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            font-weight: bold;
+        }
+
+        .control-musica {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+        }
+
+        .boton-musica {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            font-weight: bold;
+            color: #6b7fdb;
+        }
+
+        .boton-musica:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        @keyframes pulso {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
+        }
+
+        .confeti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            animation: caer 3s linear infinite;
+        }
+
+        @keyframes caer {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .fotos-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .foto-bts {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 15px;
+            border: 4px solid white;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            object-fit: cover;
+            opacity: 0;
+            animation: aparecer 1s ease-in forwards, flotar 3s ease-in-out infinite;
+        }
+
+        @keyframes flotar {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        @keyframes aparecer {
+            to { opacity: 1; }
+        }
+
+        .foto-bts:nth-child(1) { top: 10%; left: 5%; animation-delay: 0.5s; }
+        .foto-bts:nth-child(2) { top: 15%; right: 5%; animation-delay: 1s; }
+        .foto-bts:nth-child(3) { bottom: 20%; left: 8%; animation-delay: 1.5s; }
+        .foto-bts:nth-child(4) { bottom: 15%; right: 8%; animation-delay: 2s; }
+        .foto-bts:nth-child(5) { top: 45%; left: 2%; animation-delay: 2.5s; }
+        .foto-bts:nth-child(6) { top: 45%; right: 2%; animation-delay: 3s; }
+    </style>
+</head>
+<body>
+    <div class="fotos-container">
+        <img class="foto-bts" src="image/J-Hope.jpg" alt="BTS">
+        <img class="foto-bts" src="image/Jimin.jpg" alt="BTS">
+        <img class="foto-bts" src="image/Jungkook.jpg" alt="BTS">
+        <img class="foto-bts" src="image/V.jpg" alt="BTS">
+        <img class="foto-bts" src="image/Suga.jpg" alt="BTS">
+        <img class="foto-bts" src="image/RM.jpg" alt="BTS">
+    </div>
+
+    <div class="titulo">¡FELIZ CUMPLEAÑOS MEYLIN!</div>
+    <div class="fecha">🎂 03 de Enero 2026 🎂</div>
+    <div class="mensaje">🎉 Que tengas un día maravilloso 🎂</div>
+    
+    <canvas id="canvas3d"></canvas>
+    
+    <div class="frase">"Que este nuevo año de vida esté lleno de alegría, amor y momentos inolvidables"</div>
+    
+    <div class="control-musica">
+        <button class="boton-musica" id="btnMusica">🎵 Reproducir Música</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Control de música
+        let musicaReproduciendo = false;
+        const audio = new Audio('musica/musica.mp4'); // Ruta de tu archivo de música
+        audio.loop = true; // Repetir la música
+
+        const btnMusica = document.getElementById('btnMusica');
+        
+        const iniciarMusica = () => {
+            if (!musicaReproduciendo) {
+                audio.play();
+                btnMusica.textContent = '⏸️ Pausar Música';
+                musicaReproduciendo = true;
+            } else {
+                audio.pause();
+                btnMusica.textContent = '🎵 Reproducir Música';
+                musicaReproduciendo = false;
+            }
+        };
+
+        btnMusica.addEventListener('click', iniciarMusica);
+
+        // THREE.JS
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas3d'), alpha: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.position.z = 15;
+
+        // Crear pastel 3D
+        const crearPastel = () => {
+            const grupo = new THREE.Group();
+            
+            // Base del pastel (blanca)
+            const geometriaBase = new THREE.CylinderGeometry(2, 2.2, 1.5, 32);
+            const materialBase = new THREE.MeshPhongMaterial({ 
+                color: 0xffffff,
+                shininess: 100
+            });
+            const base = new THREE.Mesh(geometriaBase, materialBase);
+            base.position.y = -2;
+            grupo.add(base);
+
+            // Capa media (amarilla/dorada)
+            const geometriaMedio = new THREE.CylinderGeometry(1.7, 1.9, 1.2, 32);
+            const materialMedio = new THREE.MeshPhongMaterial({ 
+                color: 0xffd700,
+                shininess: 100
+            });
+            const medio = new THREE.Mesh(geometriaMedio, materialMedio);
+            medio.position.y = -0.85;
+            grupo.add(medio);
+
+            // Capa superior (rosa)
+            const geometriaTop = new THREE.CylinderGeometry(1.4, 1.6, 1, 32);
+            const materialTop = new THREE.MeshPhongMaterial({ 
+                color: 0xffb6c1,
+                shininess: 100
+            });
+            const top = new THREE.Mesh(geometriaTop, materialTop);
+            top.position.y = 0.1;
+            grupo.add(top);
+
+            // Velas
+            for (let i = 0; i < 4; i++) {
+                const angulo = (i / 4) * Math.PI * 2;
+                const radio = 0.8;
+                
+                // Vela
+                const geometriaVela = new THREE.CylinderGeometry(0.08, 0.08, 0.8, 16);
+                const materialVela = new THREE.MeshPhongMaterial({ color: 0xffffff });
+                const vela = new THREE.Mesh(geometriaVela, materialVela);
+                vela.position.set(
+                    Math.cos(angulo) * radio,
+                    1,
+                    Math.sin(angulo) * radio
+                );
+                grupo.add(vela);
+
+                // Llama
+                const geometriaLlama = new THREE.SphereGeometry(0.15, 16, 16);
+                const materialLlama = new THREE.MeshBasicMaterial({ 
+                    color: 0xffa500,
+                    transparent: true,
+                    opacity: 0.9
+                });
+                const llama = new THREE.Mesh(geometriaLlama, materialLlama);
+                llama.position.set(
+                    Math.cos(angulo) * radio,
+                    1.5,
+                    Math.sin(angulo) * radio
+                );
+                grupo.add(llama);
+            }
+
+            return grupo;
+        };
+
+        const pastel = crearPastel();
+        scene.add(pastel);
+
+        const pastel2 = crearPastel();
+        scene.add(pastel2);
+
+        pastel.position.x = -8;
+        pastel.position.y = -2;
+        pastel2.position.x = 8;
+        pastel2.position.y = -2;
+
+        // Crear globos
+        const crearGlobo = (x, y, z, color) => {
+            const grupo = new THREE.Group();
+            
+            // Globo con forma ovalada (más realista)
+            const geometria = new THREE.SphereGeometry(0.5, 32, 32);
+            const material = new THREE.MeshPhongMaterial({ 
+                color: color,
+                shininess: 100
+            });
+            const globo = new THREE.Mesh(geometria, material);
+            // Escalar para hacer forma de globo real (más alto que ancho)
+            globo.scale.set(0.8, 1.2, 0.8);
+            grupo.add(globo);
+
+            // Nudo del globo (parte inferior)
+            const geometriaNudo = new THREE.SphereGeometry(0.12, 16, 16);
+            const materialNudo = new THREE.MeshPhongMaterial({ 
+                color: color,
+                shininess: 80
+            });
+            const nudo = new THREE.Mesh(geometriaNudo, materialNudo);
+            nudo.position.y = -0.65;
+            nudo.scale.set(0.7, 1.2, 0.7);
+            grupo.add(nudo);
+
+            // Cuerda
+            const geometriaCuerda = new THREE.CylinderGeometry(0.02, 0.02, 3, 8);
+            const materialCuerda = new THREE.MeshBasicMaterial({ color: 0x333333 });
+            const cuerda = new THREE.Mesh(geometriaCuerda, materialCuerda);
+            cuerda.position.y = -2.2;
+            grupo.add(cuerda);
+
+            grupo.position.set(x, y, z);
+            return grupo;
+        };
+
+        const globos = [
+            crearGlobo(-10, 3, 2, 0xff0000),
+            crearGlobo(-12, 1, 2, 0x00ff00),
+            crearGlobo(10, 2.5, 2, 0xff00ff),
+            crearGlobo(12, 0.5, 2, 0x0000ff),
+            crearGlobo(-11, -1, 2, 0xffff00),
+            crearGlobo(-13, 2, 2, 0xff6600),
+            crearGlobo(13, 1.5, 2, 0x00ffff),
+            crearGlobo(-10, 4, 2, 0xff1493),
+            crearGlobo(11, -0.5, 2, 0x9400d3),
+            crearGlobo(-12, -2, 2, 0x32cd32)
+        ];
+
+        globos.forEach(globo => scene.add(globo));
+
+        // Iluminación
+        const luzAmbiente = new THREE.AmbientLight(0xffffff, 0.7);
+        scene.add(luzAmbiente);
+
+        const luzPuntual = new THREE.PointLight(0xffffff, 0.9);
+        luzPuntual.position.set(5, 5, 5);
+        scene.add(luzPuntual);
+
+        const luzPuntual2 = new THREE.PointLight(0xffa500, 0.6);
+        luzPuntual2.position.set(-5, 3, 5);
+        scene.add(luzPuntual2);
+
+        // Crear confeti
+        const crearConfeti = () => {
+            for (let i = 0; i < 40; i++) {
+                setTimeout(() => {
+                    const confeti = document.createElement('div');
+                    confeti.className = 'confeti';
+                    
+                    confeti.style.left = Math.random() * 100 + '%';
+                    confeti.style.top = '-10px';
+                    confeti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    confeti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    confeti.style.animationDelay = Math.random() * 0.5 + 's';
+                    
+                    document.body.appendChild(confeti);
+                    
+                    setTimeout(() => confeti.remove(), 5000);
+                }, i * 50);
+            }
+        };
+
+        crearConfeti();
+        setInterval(crearConfeti, 2500);
+
+        // Animación
+        let tiempo = 0;
+        const animar = () => {
+            requestAnimationFrame(animar);
+            tiempo += 0.01;
+
+            pastel.rotation.y += 0.005;
+            pastel2.rotation.y -= 0.005;
+
+            globos.forEach((globo, i) => {
+                globo.position.y += Math.sin(tiempo + i) * 0.01;
+            });
+
+            renderer.render(scene, camera);
+        };
+
+        animar();
+
+        // Responsive
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
