@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>¡Feliz Cumpleaños!</title>
     <style>
         * {
@@ -12,21 +12,28 @@
         }
 
         body {
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             background: linear-gradient(135deg, #6b7fdb 0%, #7b5fb8 100%);
             font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            position: relative;
         }
 
         canvas {
             display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
         }
 
         .titulo {
             position: absolute;
-            top: 15px;
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: clamp(2em, 8vw, 4em);
+            font-size: clamp(1.8em, 7vw, 4em);
             font-weight: bold;
             color: #ff00ff;
             text-shadow: 0 0 20px rgba(255, 0, 255, 0.8),
@@ -36,14 +43,15 @@
             text-align: center;
             padding: 0 10px;
             width: 100%;
+            line-height: 1.2;
         }
 
         .fecha {
             position: absolute;
-            top: clamp(60px, 15vh, 100px);
+            top: clamp(55px, 12vh, 90px);
             left: 50%;
             transform: translateX(-50%);
-            font-size: clamp(1.2em, 5vw, 2em);
+            font-size: clamp(1em, 4.5vw, 2em);
             font-weight: bold;
             color: #ffd700;
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
@@ -55,14 +63,14 @@
 
         .mensaje {
             position: absolute;
-            top: clamp(100px, 22vh, 160px);
+            top: clamp(90px, 18vh, 150px);
             left: 50%;
             transform: translateX(-50%);
-            font-size: clamp(1em, 4vw, 1.5em);
+            font-size: clamp(0.95em, 3.8vw, 1.5em);
             color: #ffffff;
             z-index: 10;
             text-align: center;
-            padding: 0 10px;
+            padding: 0 15px;
             width: 100%;
         }
 
@@ -71,49 +79,46 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: clamp(1em, 4vw, 1.8em);
+            font-size: clamp(0.95em, 3.8vw, 1.8em);
             font-style: italic;
             color: #29e1ee;
-            max-width: min(90%, 500px);
-            line-height: 1.6;
-            background: rgba(0, 0, 0, 0.5);
-            padding: clamp(15px, 5vw, 30px) clamp(20px, 6vw, 40px);
-            border-radius: 20px;
+            max-width: min(88%, 500px);
+            line-height: 1.5;
+            background: rgba(0, 0, 0, 0.6);
+            padding: clamp(18px, 4.5vw, 30px) clamp(22px, 5.5vw, 40px);
+            border-radius: 18px;
             backdrop-filter: blur(10px);
             z-index: 10;
             text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
             font-weight: bold;
         }
 
         .control-musica {
-            position: absolute;
-            bottom: 20px;
+            position: fixed;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 20;
         }
 
         .boton-musica {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border: none;
-            padding: clamp(10px, 3vw, 15px) clamp(20px, 5vw, 30px);
+            padding: clamp(12px, 3vw, 15px) clamp(25px, 6vw, 35px);
             border-radius: 50px;
-            font-size: clamp(0.9em, 3.5vw, 1.2em);
+            font-size: clamp(1em, 3.8vw, 1.2em);
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
             font-weight: bold;
             color: #6b7fdb;
-        }
-
-        .boton-musica:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            touch-action: manipulation;
         }
 
         .boton-musica:active {
             transform: scale(0.95);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
         }
 
         @keyframes pulso {
@@ -122,10 +127,11 @@
         }
 
         .confeti {
-            position: absolute;
+            position: fixed;
             width: 10px;
             height: 10px;
             animation: caer 3s linear infinite;
+            z-index: 8;
         }
 
         @keyframes caer {
@@ -136,20 +142,22 @@
         }
 
         .fotos-container {
-            position: absolute;
+            position: fixed;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 5;
+            z-index: 9;
+            top: 0;
+            left: 0;
         }
 
         .foto-bts {
             position: absolute;
-            width: clamp(70px, 15vw, 120px);
-            height: clamp(70px, 15vw, 120px);
-            border-radius: 15px;
-            border: 4px solid white;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            width: clamp(65px, 13vw, 120px);
+            height: clamp(65px, 13vw, 120px);
+            border-radius: 12px;
+            border: 3px solid white;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
             object-fit: cover;
             opacity: 0;
             animation: aparecer 1s ease-in forwards, flotar 3s ease-in-out infinite;
@@ -157,67 +165,70 @@
 
         @keyframes flotar {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(3deg); }
+            50% { transform: translateY(-12px) rotate(3deg); }
         }
 
         @keyframes aparecer {
-            to { opacity: 1; }
+            to { opacity: 0.95; }
         }
 
-        /* Ajustes para móviles */
-        @media (max-width: 768px) {
-            .foto-bts:nth-child(1) { top: 8%; left: 2%; animation-delay: 0.5s; }
-            .foto-bts:nth-child(2) { top: 12%; right: 2%; animation-delay: 1s; }
-            .foto-bts:nth-child(3) { bottom: 25%; left: 3%; animation-delay: 1.5s; }
-            .foto-bts:nth-child(4) { bottom: 20%; right: 3%; animation-delay: 2s; }
-            .foto-bts:nth-child(5) { top: 40%; left: 1%; animation-delay: 2.5s; }
-            .foto-bts:nth-child(6) { top: 40%; right: 1%; animation-delay: 3s; }
+        /* Posiciones móviles optimizadas */
+        .foto-bts:nth-child(1) { top: 8%; left: 3%; animation-delay: 0.5s; }
+        .foto-bts:nth-child(2) { top: 10%; right: 3%; animation-delay: 1s; }
+        .foto-bts:nth-child(3) { bottom: 22%; left: 4%; animation-delay: 1.5s; }
+        .foto-bts:nth-child(4) { bottom: 18%; right: 4%; animation-delay: 2s; }
+        .foto-bts:nth-child(5) { top: 38%; left: 2%; animation-delay: 2.5s; }
+        .foto-bts:nth-child(6) { top: 38%; right: 2%; animation-delay: 3s; }
 
-            .titulo {
-                top: 10px;
-            }
-
-            .frase {
-                max-width: 85%;
-            }
+        /* Tablets */
+        @media (min-width: 600px) and (max-width: 1024px) {
+            .foto-bts:nth-child(1) { top: 9%; left: 4%; }
+            .foto-bts:nth-child(2) { top: 12%; right: 4%; }
+            .foto-bts:nth-child(3) { bottom: 20%; left: 6%; }
+            .foto-bts:nth-child(4) { bottom: 17%; right: 6%; }
+            .foto-bts:nth-child(5) { top: 42%; left: 2%; }
+            .foto-bts:nth-child(6) { top: 42%; right: 2%; }
         }
 
         /* Desktop */
-        @media (min-width: 769px) {
-            .foto-bts:nth-child(1) { top: 10%; left: 5%; animation-delay: 0.5s; }
-            .foto-bts:nth-child(2) { top: 15%; right: 5%; animation-delay: 1s; }
-            .foto-bts:nth-child(3) { bottom: 20%; left: 8%; animation-delay: 1.5s; }
-            .foto-bts:nth-child(4) { bottom: 15%; right: 8%; animation-delay: 2s; }
-            .foto-bts:nth-child(5) { top: 45%; left: 2%; animation-delay: 2.5s; }
-            .foto-bts:nth-child(6) { top: 45%; right: 2%; animation-delay: 3s; }
+        @media (min-width: 1025px) {
+            body {
+                overflow: hidden;
+            }
+            
+            .foto-bts:nth-child(1) { top: 10%; left: 5%; }
+            .foto-bts:nth-child(2) { top: 15%; right: 5%; }
+            .foto-bts:nth-child(3) { bottom: 20%; left: 8%; }
+            .foto-bts:nth-child(4) { bottom: 15%; right: 8%; }
+            .foto-bts:nth-child(5) { top: 45%; left: 2%; }
+            .foto-bts:nth-child(6) { top: 45%; right: 2%; }
         }
 
-        /* Móviles pequeños */
-        @media (max-width: 480px) {
+        /* Móviles muy pequeños */
+        @media (max-width: 360px) {
             .titulo {
-                font-size: 2em;
-                top: 5px;
+                font-size: 1.6em;
+                top: 8px;
             }
             
             .fecha {
-                top: 50px;
-                font-size: 1em;
+                top: 48px;
+                font-size: 0.9em;
             }
             
             .mensaje {
-                top: 80px;
-                font-size: 0.9em;
+                top: 75px;
+                font-size: 0.85em;
             }
 
             .frase {
-                font-size: 0.95em;
-                padding: 15px 20px;
+                font-size: 0.9em;
+                padding: 16px 20px;
             }
 
             .foto-bts {
-                width: 60px;
-                height: 60px;
-                border: 2px solid white;
+                width: 55px;
+                height: 55px;
             }
         }
     </style>
@@ -234,7 +245,7 @@
 
     <div class="titulo">¡FELIZ CUMPLEAÑOS MEYLIN!</div>
     <div class="fecha">🎂 03 de Enero 2026 🎂</div>
-    <div class="mensaje">🎉 Que tengas un día maravilloso 🎂</div>
+    <div class="mensaje">🎉 Que tengas un día maravilloso 🎉</div>
     
     <canvas id="canvas3d"></canvas>
     
@@ -255,7 +266,7 @@
         
         const iniciarMusica = () => {
             if (!musicaReproduciendo) {
-                audio.play();
+                audio.play().catch(e => console.log('Error al reproducir:', e));
                 btnMusica.textContent = '⏸️ Pausar Música';
                 musicaReproduciendo = true;
             } else {
@@ -270,21 +281,28 @@
         // THREE.JS
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas3d'), alpha: true });
+        const renderer = new THREE.WebGLRenderer({ 
+            canvas: document.getElementById('canvas3d'), 
+            alpha: true,
+            antialias: window.innerWidth > 768
+        });
         
         renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         
-        // Ajustar posición de cámara según dispositivo
+        // Detectar dispositivo
         const isMobile = window.innerWidth <= 768;
-        camera.position.z = isMobile ? 20 : 15;
+        const isSmallMobile = window.innerWidth <= 480;
+        
+        camera.position.z = isSmallMobile ? 22 : (isMobile ? 20 : 15);
 
         // Crear pastel 3D
         const crearPastel = () => {
             const grupo = new THREE.Group();
             
-            const escala = isMobile ? 0.7 : 1;
+            const escala = isSmallMobile ? 0.6 : (isMobile ? 0.7 : 1);
             
-            const geometriaBase = new THREE.CylinderGeometry(2, 2.2, 1.5, 32);
+            const geometriaBase = new THREE.CylinderGeometry(2, 2.2, 1.5, 24);
             const materialBase = new THREE.MeshPhongMaterial({ 
                 color: 0xffffff,
                 shininess: 100
@@ -294,7 +312,7 @@
             base.scale.set(escala, escala, escala);
             grupo.add(base);
 
-            const geometriaMedio = new THREE.CylinderGeometry(1.7, 1.9, 1.2, 32);
+            const geometriaMedio = new THREE.CylinderGeometry(1.7, 1.9, 1.2, 24);
             const materialMedio = new THREE.MeshPhongMaterial({ 
                 color: 0xffd700,
                 shininess: 100
@@ -304,7 +322,7 @@
             medio.scale.set(escala, escala, escala);
             grupo.add(medio);
 
-            const geometriaTop = new THREE.CylinderGeometry(1.4, 1.6, 1, 32);
+            const geometriaTop = new THREE.CylinderGeometry(1.4, 1.6, 1, 24);
             const materialTop = new THREE.MeshPhongMaterial({ 
                 color: 0xffb6c1,
                 shininess: 100
@@ -318,7 +336,7 @@
                 const angulo = (i / 4) * Math.PI * 2;
                 const radio = 0.8 * escala;
                 
-                const geometriaVela = new THREE.CylinderGeometry(0.08, 0.08, 0.8, 16);
+                const geometriaVela = new THREE.CylinderGeometry(0.08, 0.08, 0.8, 12);
                 const materialVela = new THREE.MeshPhongMaterial({ color: 0xffffff });
                 const vela = new THREE.Mesh(geometriaVela, materialVela);
                 vela.position.set(
@@ -329,7 +347,7 @@
                 vela.scale.set(escala, escala, escala);
                 grupo.add(vela);
 
-                const geometriaLlama = new THREE.SphereGeometry(0.15, 16, 16);
+                const geometriaLlama = new THREE.SphereGeometry(0.15, 12, 12);
                 const materialLlama = new THREE.MeshBasicMaterial({ 
                     color: 0xffa500,
                     transparent: true,
@@ -354,19 +372,18 @@
         const pastel2 = crearPastel();
         scene.add(pastel2);
 
-        const posX = isMobile ? 10 : 8;
-        pastel.position.x = -posX;
-        pastel.position.y = -2;
-        pastel2.position.x = posX;
-        pastel2.position.y = -2;
+        const posX = isSmallMobile ? 11 : (isMobile ? 10 : 8);
+        const posY = isSmallMobile ? -3 : -2;
+        pastel.position.set(-posX, posY, 0);
+        pastel2.position.set(posX, posY, 0);
 
         // Crear globos
         const crearGlobo = (x, y, z, color) => {
             const grupo = new THREE.Group();
             
-            const escala = isMobile ? 0.7 : 1;
+            const escala = isSmallMobile ? 0.6 : (isMobile ? 0.7 : 1);
             
-            const geometria = new THREE.SphereGeometry(0.5, 32, 32);
+            const geometria = new THREE.SphereGeometry(0.5, 24, 24);
             const material = new THREE.MeshPhongMaterial({ 
                 color: color,
                 shininess: 100
@@ -375,7 +392,7 @@
             globo.scale.set(0.8 * escala, 1.2 * escala, 0.8 * escala);
             grupo.add(globo);
 
-            const geometriaNudo = new THREE.SphereGeometry(0.12, 16, 16);
+            const geometriaNudo = new THREE.SphereGeometry(0.12, 12, 12);
             const materialNudo = new THREE.MeshPhongMaterial({ 
                 color: color,
                 shininess: 80
@@ -385,7 +402,7 @@
             nudo.scale.set(0.7 * escala, 1.2 * escala, 0.7 * escala);
             grupo.add(nudo);
 
-            const geometriaCuerda = new THREE.CylinderGeometry(0.02, 0.02, 3, 8);
+            const geometriaCuerda = new THREE.CylinderGeometry(0.02, 0.02, 3, 6);
             const materialCuerda = new THREE.MeshBasicMaterial({ color: 0x333333 });
             const cuerda = new THREE.Mesh(geometriaCuerda, materialCuerda);
             cuerda.position.y = -2.2 * escala;
@@ -396,18 +413,18 @@
             return grupo;
         };
 
-        const factorPos = isMobile ? 1.3 : 1;
+        const factorPos = isSmallMobile ? 1.4 : (isMobile ? 1.3 : 1);
         const globos = [
-            crearGlobo(-10 * factorPos, 3, 2, 0xff0000),
-            crearGlobo(-12 * factorPos, 1, 2, 0x00ff00),
-            crearGlobo(10 * factorPos, 2.5, 2, 0xff00ff),
-            crearGlobo(12 * factorPos, 0.5, 2, 0x0000ff),
-            crearGlobo(-11 * factorPos, -1, 2, 0xffff00),
-            crearGlobo(-13 * factorPos, 2, 2, 0xff6600),
-            crearGlobo(13 * factorPos, 1.5, 2, 0x00ffff),
-            crearGlobo(-10 * factorPos, 4, 2, 0xff1493),
-            crearGlobo(11 * factorPos, -0.5, 2, 0x9400d3),
-            crearGlobo(-12 * factorPos, -2, 2, 0x32cd32)
+            crearGlobo(-10 * factorPos, 3, 1, 0xff0000),
+            crearGlobo(-12 * factorPos, 1, 1, 0x00ff00),
+            crearGlobo(10 * factorPos, 2.5, 1, 0xff00ff),
+            crearGlobo(12 * factorPos, 0.5, 1, 0x0000ff),
+            crearGlobo(-11 * factorPos, -1, 1, 0xffff00),
+            crearGlobo(-13 * factorPos, 2, 1, 0xff6600),
+            crearGlobo(13 * factorPos, 1.5, 1, 0x00ffff),
+            crearGlobo(-10 * factorPos, 4, 1, 0xff1493),
+            crearGlobo(11 * factorPos, -0.5, 1, 0x9400d3),
+            crearGlobo(-12 * factorPos, -2, 1, 0x32cd32)
         ];
 
         globos.forEach(globo => scene.add(globo));
@@ -416,17 +433,17 @@
         const luzAmbiente = new THREE.AmbientLight(0xffffff, 0.7);
         scene.add(luzAmbiente);
 
-        const luzPuntual = new THREE.PointLight(0xffffff, 0.9);
+        const luzPuntual = new THREE.PointLight(0xffffff, 0.8);
         luzPuntual.position.set(5, 5, 5);
         scene.add(luzPuntual);
 
-        const luzPuntual2 = new THREE.PointLight(0xffa500, 0.6);
+        const luzPuntual2 = new THREE.PointLight(0xffa500, 0.5);
         luzPuntual2.position.set(-5, 3, 5);
         scene.add(luzPuntual2);
 
         // Crear confeti
         const crearConfeti = () => {
-            const cantidad = isMobile ? 25 : 40;
+            const cantidad = isSmallMobile ? 20 : (isMobile ? 25 : 40);
             for (let i = 0; i < cantidad; i++) {
                 setTimeout(() => {
                     const confeti = document.createElement('div');
@@ -467,13 +484,18 @@
         animar();
 
         // Responsive
+        let resizeTimeout;
         window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            
-            const nuevoIsMobile = window.innerWidth <= 768;
-            camera.position.z = nuevoIsMobile ? 20 : 15;
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                
+                const nuevoIsMobile = window.innerWidth <= 768;
+                const nuevoIsSmallMobile = window.innerWidth <= 480;
+                camera.position.z = nuevoIsSmallMobile ? 22 : (nuevoIsMobile ? 20 : 15);
+            }, 250);
         });
     </script>
 </body>
